@@ -1,7 +1,7 @@
 <form class="form-login" #f="ngForm" (submit)="doLogin()">
   <mat-card class="card-login">
-    <mat-card-title>Authentification</mat-card-title>
-    <mat-card-content>
+    <mat-card-title class="mat-card-login-title">Authentification</mat-card-title>
+    <mat-card-content class="card-login-content">
       <div fxLayout="row">
         <mat-form-field class="login-field">
           <input matInput placeholder="Login" type="email" [(ngModel)]="credentials.login" name="login" required>
@@ -13,7 +13,7 @@
         </mat-form-field>
       </div>
     </mat-card-content>
-    <mat-card-actions>
+    <mat-card-actions class="mat-card-login-actions">
       <button mat-raised-button color="accent" type="submit" [disabled]="!f.valid">login</button>
     </mat-card-actions>
   </mat-card>

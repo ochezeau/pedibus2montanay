@@ -1,7 +1,7 @@
 <mat-progress-bar mode="indeterminate" *ngIf="showSpinner; else loaded" class="user-loading"></mat-progress-bar>
 <ng-template #loaded>
   <mat-card class="card-search">
-    <form>
+    <form class="form-search-list">
       <mat-icon class="search-ico" color="primary">search</mat-icon>
       <mat-form-field>
         <input matInput placeholder="Famille" [(ngModel)]="filter.familly" name="familly">

@@ -1,7 +1,7 @@
 <mat-progress-bar mode="indeterminate" *ngIf="showSpinner; else loaded" class="user-loading"></mat-progress-bar>
 <ng-template #loaded>
-  <mat-card class="setting">
-    <span class="title">Planning semaine {{current.week}} - {{current.year}}</span>
+  <mat-card class="setting-planning">
+    <span class="title-planning">Planning semaine {{current.week}} - {{current.year}}</span>
     <mat-form-field class="select-day-planning">
       <mat-select placeholder="Jours" multiple [(ngModel)]="current.days" name="days">
         <mat-option value="Lundi">Lundi</mat-option>
