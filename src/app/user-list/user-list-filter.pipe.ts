@@ -1,13 +1,13 @@
-import {Pipe, PipeTransform} from '@angular/core';
-import {DatabaseWrapper, Person, User, UsersFilter} from '../app.model';
-import {UserService} from '../service/user.service';
+import { Pipe, PipeTransform } from "@angular/core";
+import { DatabaseWrapper, Person, User, UsersFilter } from "../app.model";
+import { UserService } from "../service/user.service";
 
 @Pipe({
-  name: 'userListFilter',
+  name: "userListFilter",
   pure: false
 })
 export class UserListFilterPipe implements PipeTransform {
-  private readonly DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+  private readonly DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday"];
 
   constructor(private userService: UserService) {
   }
@@ -54,6 +54,9 @@ export class UserListFilterPipe implements PipeTransform {
       } else {
         persons.push(...u.value.accompanists);
         persons.push(...u.value.childs);
+      }
+      if (persons.length === 0) {
+        return result;
       }
       return persons.filter(p => {
         return days.filter(d => (p[d] !== undefined || p[this.userService.exProp(d)] !== undefined) && filter(d, p)).length > 0;

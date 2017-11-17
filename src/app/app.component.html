@@ -2,8 +2,20 @@
   <img class="app-logo" src="/assets/logo.png"/>
   <span class="app-toolbar-title">Pédibus Montanay</span>
 
-  <a mat-button routerLink="/users" routerLinkActive="app-toolbar-active">Utilisateurs</a>
-  <a mat-button routerLink="/planning" routerLinkActive="app-toolbar-active">Planning</a>
+  <ng-container *ngIf="auth">
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-btn">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" class="menu-list">
+      <button mat-menu-item (click)="doExit()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Déconnection</span>
+      </button>
+    </mat-menu>
+    <a mat-button routerLink="/users" routerLinkActive="app-toolbar-active">Utilisateurs</a>
+    <a mat-button routerLink="/planning" routerLinkActive="app-toolbar-active">Planning</a>
+
+  </ng-container>
 </mat-toolbar>
 <div class="app-content-container">
   <router-outlet></router-outlet>

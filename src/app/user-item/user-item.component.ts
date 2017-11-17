@@ -1,15 +1,15 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {DatabaseWrapper, User} from '../app.model';
-import {NgForm} from '@angular/forms';
-import {UserService} from '../service/user.service';
-import {NotifService} from '../service/notif.service';
-import {ChildListComponent} from '../child-list/child-list.component';
-import {AccompanistListComponent} from '../accompanist-list/accompanist-list.component';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from "@angular/core";
+import { DatabaseWrapper, User } from "../app.model";
+import { NgForm } from "@angular/forms";
+import { UserService } from "../service/user.service";
+import { NotifService } from "../service/notif.service";
+import { ChildListComponent } from "../child-list/child-list.component";
+import { AccompanistListComponent } from "../accompanist-list/accompanist-list.component";
 
 @Component({
-  selector: 'app-user-item',
-  templateUrl: './user-item.component.html',
-  styleUrls: ['./user-item.component.sass']
+  selector: "app-user-item",
+  templateUrl: "./user-item.component.html",
+  styleUrls: ["./user-item.component.sass"]
 })
 export class UserItemComponent implements OnInit, OnChanges {
 
@@ -19,7 +19,7 @@ export class UserItemComponent implements OnInit, OnChanges {
   @Input()
   public expanded: boolean;
 
-  @ViewChild('f')
+  @ViewChild("f")
   public form: NgForm;
 
   @ViewChild(ChildListComponent)
@@ -36,6 +36,7 @@ export class UserItemComponent implements OnInit, OnChanges {
 
   private savedUser: string;
   public formUpdate = false;
+  public deleting = false;
 
   constructor(private userService: UserService, private notifService: NotifService) {
   }
@@ -47,8 +48,7 @@ export class UserItemComponent implements OnInit, OnChanges {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (changes['user']) {
-
+    if (changes["user"]) {
       this.savedUser = JSON.stringify(this.user.value);
     }
   }
@@ -57,12 +57,13 @@ export class UserItemComponent implements OnInit, OnChanges {
     event.stopPropagation();
     this.userService.updateUser(user).then(() => {
       this.savedUser = JSON.stringify(this.user.value);
-      this.notifService.show('Mise à jour de ' + user.value.name + ' effectuée');
+      this.notifService.show("Mise à jour de " + user.value.name + " effectuée");
     });
   }
 
   public deleteUser(): void {
-    this.userService.deleteUser(this.user).then(() => this.notifService.show('Suppression effectuée'));
+    this.deleting = true;
+    this.userService.deleteUser(this.user).then(() => this.notifService.show("Suppression effectuée"));
   }
 
   public undoChange(): void {
@@ -90,9 +91,10 @@ export class UserItemComponent implements OnInit, OnChanges {
     this.formUpdate = current !== this.savedUser;
   }
 
-
   public get formInvalid(): boolean {
+    if (this.deleting) {
+      return false;
+    }
     return this.form.invalid || this.childListComponent.invalid || this.accompanistListComponent.invalid;
   }
-
 }

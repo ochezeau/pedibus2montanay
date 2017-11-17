@@ -1,6 +1,6 @@
-export enum Ride { ABS = 'ABS', FE = 'FE', PE = 'PE', BE = 'BE', FP = 'FP', PB = 'PB', FE1_2 = 'FE 1/2', PE1_2 = 'PE 1/2', }
+export enum Ride { ABS = "ABS", FE = "FE", PE = "PE", BE = "BE", FP = "FP", PB = "PB", FE1_2 = "FE 1/2", PE1_2 = "PE 1/2", }
 
-export enum Classe {PS = 'PS', MS = 'MS', GS = 'GS', CP = 'CP', CE1 = 'CE1', CE2 = 'CE2', CM1 = 'CM1', CM2 = 'CM2'}
+export enum Classe {PS = "PS", MS = "MS", GS = "GS", CP = "CP", CE1 = "CE1", CE2 = "CE2", CM1 = "CM1", CM2 = "CM2"}
 
 /*export const Rides: Array<RideOption> = [
   {c: 'ABS', l: 'Absent'},
@@ -30,7 +30,6 @@ export enum Classe {PS = 'PS', MS = 'MS', GS = 'GS', CP = 'CP', CE1 = 'CE1', CE2
   {c: 'FP Oc', l: 'Ferière -> Poype Oc'},
   {c: 'PB Oc', l: 'Poype -> Barmelle Oc'},
 ];*/
-
 
 export class DatabaseWrapper<T> {
   key: string;
@@ -107,4 +106,9 @@ export class CurrentPlanning {
   week: number;
   year: number;
   days: Array<string> = [];
+}
+
+export class Credentials {
+  login: string;
+  password: string;
 }

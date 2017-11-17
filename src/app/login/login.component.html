@@ -1,0 +1,20 @@
+<form class="form-login" #f="ngForm" (submit)="doLogin()">
+  <mat-card class="card-login">
+    <mat-card-title>Authentification</mat-card-title>
+    <mat-card-content>
+      <div fxLayout="row">
+        <mat-form-field>
+          <input matInput placeholder="Login" type="email" [(ngModel)]="credentials.login" name="login" required>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row">
+        <mat-form-field>
+          <input matInput placeholder="Mot de passe" type="password" [(ngModel)]="credentials.password" name="password" required>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="accent" type="submit" [disabled]="!f.valid">login</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
