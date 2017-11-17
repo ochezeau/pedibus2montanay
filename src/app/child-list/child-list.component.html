@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Enfants
+      <button mat-icon-button (click)="addChild()">
+        <mat-icon class="mat-small-icon">add</mat-icon>
+      </button>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let c of user.childs; index as i">
+        <app-child-item [child]="c" (delete)="deleteChild(i)" (formChange)="childFormChange()"></app-child-item>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

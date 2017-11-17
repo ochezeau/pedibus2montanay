@@ -1,0 +1,63 @@
+<mat-progress-bar mode="indeterminate" *ngIf="showSpinner; else loaded" class="user-loading"></mat-progress-bar>
+<ng-template #loaded>
+  <mat-card class="setting">
+    <span class="title">Planning semaine {{current.week}} - {{current.year}}</span>
+    <mat-form-field class="select-day">
+      <mat-select placeholder="Jours" multiple [(ngModel)]="current.days" name="days">
+        <mat-option value="Lundi">Lundi</mat-option>
+        <mat-option value="Mardi">Mardi</mat-option>
+        <mat-option value="Mercredi">Mercredi</mat-option>
+        <mat-option value="Jeudi">Jeudi</mat-option>
+        <mat-option value="Vendredi">Vendredi</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-icon-button (click)="clearDays()">
+      <mat-icon class="clear-ico">clear</mat-icon>
+    </button>
+  </mat-card>
+  <table cellpadding=5 cellspacing=3>
+    <tr>
+      <th class="day-col"></th>
+      <th class="mat-elevation-z1 stop-th" colspan="2">Ferrière</th>
+      <th class="mat-elevation-z1 stop-th" colspan="2">Poype</th>
+      <th class="mat-elevation-z1 stop-th" colspan="2">Barmelle</th>
+    </tr>
+    <ng-container *ngFor="let d of planning.days">
+      <tr *ngIf="isDay(d.day)">
+        <td class="mat-elevation-z1 day-row-{{d.day.toLowerCase()}}" align="center">{{d.day}}</td>
+        <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
+          <div [innerHTML]="d.fAccompanists | personList"></div>
+          <div *ngIf="misAccompanistCount(d.fAccompanists,d.fChilds)" class="miss-acompagnist">
+            <mat-icon>warning</mat-icon>
+            <span>Manque {{misAccompanistCount(d.fAccompanists,d.fChilds)}} accompagnateur(s)</span>
+          </div>
+        </td>
+        <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
+          <div [innerHTML]="d.fChilds | personList"></div>
+        </td>
+        <td class="mat-elevation-z1  list-td day-cell-{{d.day.toLowerCase()}}">
+          <div [innerHTML]="d.pAccompanists | personList"></div>
+          <div *ngIf="misAccompanistCount(d.pAccompanists,d.pChilds)" class="miss-acompagnist">
+            <mat-icon>warning</mat-icon>
+            <span>Manque {{misAccompanistCount(d.pAccompanists,d.pChilds)}} accompagnateur(s)</span>
+          </div>
+        </td>
+        <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
+          <div [innerHTML]="d.pChilds | personList"></div>
+        </td>
+        <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
+          <div [innerHTML]="d.bAccompanists | personList"></div>
+          <div *ngIf="misAccompanistCount(d.bAccompanists,d.bChilds)" class="miss-acompagnist">
+            <mat-icon>warning</mat-icon>
+            <span>Manque {{misAccompanistCount(d.bAccompanists,d.bChilds)}} accompagnateur(s)</span>
+          </div>
+        </td>
+        <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
+          <div [innerHTML]="d.bChilds | personList"></div>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+</ng-template>
+

@@ -1,0 +1,88 @@
+@import './../../app-theme'
+
+table
+  table-layout: fixed
+  width: 100%
+
+.stop-th
+  color: white
+  background-color: mat-color($app-primary)
+
+@mixin day-row($color)
+  background-color: mat-color(mat-palette($color))
+  color: white
+  font-weight: bold
+
+.day-row-lundi
+  @include day-row($mat-grey)
+
+.day-row-mardi
+  @include day-row($mat-pink)
+
+.day-row-mercredi
+  @include day-row($mat-purple)
+
+.day-row-jeudi
+  @include day-row($mat-blue)
+
+.day-row-vendredi
+  @include day-row($mat-green)
+
+.day-cell-lundi
+  border: 1px solid mat-color(mat-palette($mat-grey))
+
+.day-cell-mardi
+  border: 1px solid mat-color(mat-palette($mat-pink))
+
+.day-cell-mercredi
+  border: 1px solid mat-color(mat-palette($mat-purple))
+
+.day-cell-jeudi
+  border: 1px solid mat-color(mat-palette($mat-blue))
+
+.day-cell-vendredi
+  border: 1px solid mat-color(mat-palette($mat-green))
+
+.day-col
+  width: 70px
+
+.list-td
+  font-size: 13px
+
+.miss-acompagnist
+  font-size: 12px
+  color: mat-color(mat-palette($app-warn))
+  span
+    display: inline-block
+    position: relative
+    bottom: 6px
+    margin: 0
+    padding: 0
+  mat-icon
+    font-size: 22px !important
+    height: 18px
+    width: 25px
+
+.setting
+  width: 70%
+  margin: 0 auto 20px auto
+  padding-left: 20px !important
+  color: mat-color($app-primary)
+
+.title
+  position: relative
+  top: 5px
+
+.select-day
+  margin-left: 50px
+  font-size: 12px
+  min-width: 250px !important
+  color: black
+
+.clear-ico
+  font-size: 18px
+  color: gray
+
+@media print
+  .clear-ico, .select-day
+    visibility: hidden !important

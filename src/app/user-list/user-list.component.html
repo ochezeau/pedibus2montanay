@@ -1,0 +1,58 @@
+<mat-progress-bar mode="indeterminate" *ngIf="showSpinner; else loaded" class="user-loading"></mat-progress-bar>
+<ng-template #loaded>
+  <mat-card class="card-search">
+    <form>
+      <mat-icon class="search-ico" color="primary">search</mat-icon>
+      <mat-form-field>
+        <input matInput placeholder="Famille" [(ngModel)]="filter.familly" name="familly">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Jours" multiple [(ngModel)]="filter.days" name="days">
+          <mat-option value="monday">lundi</mat-option>
+          <mat-option value="tuesday">mardi</mat-option>
+          <mat-option value="wednesday">mercredi</mat-option>
+          <mat-option value="thursday">jeudi</mat-option>
+          <mat-option value="friday">vendredi</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Trajet" [(ngModel)]="filter.ride" name="ride">
+          <mat-option></mat-option>
+          <mat-option value="F">Ferrière</mat-option>
+          <mat-option value="P">Poype</mat-option>
+          <mat-option value="B">Barmelle</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Person" [(ngModel)]="filter.person" name="person">
+          <mat-option></mat-option>
+          <mat-option value="childs">enfant</mat-option>
+          <mat-option value="accompanists">accompagnateur</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Occasionnel" multiple [(ngModel)]="filter.occasional" name="occasional">
+          <mat-option value="Oc">Occasionnel</mat-option>
+          <mat-option value="1_">Périodique</mat-option>
+          <mat-option value="Tel">Appelable</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-checkbox [(ngModel)]="filter.exception" name="exception">Exception</mat-checkbox>
+      <button mat-icon-button (click)="clearFilter()">
+        <mat-icon class="clear-ico" color="primary">clear</mat-icon>
+      </button>
+    </form>
+  </mat-card>
+  <mat-accordion *ngIf="users?.length > 0">
+    <app-user-item [user]="u" [expanded]="expanded(u)" *ngFor="let u of users | userListFilter:filter"
+                   (open)="panelOpen(u)"
+                   (close)="panelClose(u)"></app-user-item>
+  </mat-accordion>
+  <mat-card *ngIf="users?.length == 0">Aucun utilisateur n'est enregistré</mat-card>
+  <button mat-fab color="accent" class="user-add" (click)="addUser()" [disabled]="invalid">
+    <mat-icon class="mat-24">add</mat-icon>
+  </button>
+</ng-template>
+

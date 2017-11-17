@@ -1,0 +1,77 @@
+<mat-expansion-panel [expanded]="expanded" #panel hideToggle="true" (opened)="onPanelOpen(user)"
+                     (closed)="onPanelClose(user)"
+                     [class.panel-expanded]="panel.expanded"
+                     [class.panel-expanded-updated]="formUpdate"
+                     [class.panel-expanded-invalid]="formInvalid">
+  <mat-expansion-panel-header expandedHeight="40px" collapsedHeight="30px">
+    <mat-panel-title [class.header-expanded]="panel.expanded"
+                     [class.header-formUpdate]="!panel.expanded && formUpdate">
+      <span class="header-name" [class.header-name-close]="!panel.expanded">{{user.value.name}}</span>
+      <span class="user-summary" *ngIf="!panel.expanded && user.value.name && user.value.name.length > 0">
+        <span class="user-summary-person">{{user.value | userSummaryPerson}}</span>
+
+        <ng-container
+          *ngIf="user.value.childs &&  user.value.childs.length > 0  || user.value.accompanists && user.value.accompanists.length > 0">
+          <span class="user-summary-day user-summary-day-lundi">
+            Lundi : {{user.value | userSummaryDay:'monday'}}
+            <mat-icon class="ico-exception" *ngIf="hasException('monday')">warning</mat-icon>
+            </span>
+          <span class="user-summary-day user-summary-day-mardi">
+            Mardi : {{user.value | userSummaryDay:'tuesday'}}
+            <mat-icon class="ico-exception" *ngIf="hasException('tuesday')">warning</mat-icon>
+            </span>
+          <span class="user-summary-day user-summary-day-mercredi">
+            Mercredi : {{user.value | userSummaryDay:'wednesday'}}
+          <mat-icon class="ico-exception" *ngIf="hasException('wednesday')">warning</mat-icon>
+            </span>
+          <span class="user-summary-day user-summary-day-jeudi">
+            Jeudi : {{user.value | userSummaryDay:'thursday'}}
+          <mat-icon class="ico-exception" *ngIf="hasException('thursday')">warning</mat-icon>
+            </span>
+          <span class="user-summary-day user-summary-day-vendredi">
+            Vendredi : {{user.value | userSummaryDay:'friday'}}
+            <mat-icon class="ico-exception" *ngIf="hasException('friday')">warning</mat-icon>
+            </span>
+          </ng-container>
+      </span>
+
+    </mat-panel-title>
+    <ng-container *ngIf="panel.expanded">
+      <button mat-icon-button color="primary" [disabled]="!formUpdate || formInvalid" (click)="saveUser(user,$event)"
+              class="header-icon-button">
+        <mat-icon>save</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" (click)="undoChange()" [disabled]="!formUpdate"
+              class="header-icon-button">
+        <mat-icon>undo</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" (click)="deleteUser()" class="header-icon-button">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </ng-container>
+  </mat-expansion-panel-header>
+
+  <mat-card>
+    <form #f="ngForm">
+      <div fxLayout="row">
+        <mat-form-field class="form-name">
+          <input matInput placeholder="Famille" [(ngModel)]="user.value.name" name="name" required>
+        </mat-form-field>
+        <mat-form-field class="form-email">
+          <input matInput placeholder="Email" [(ngModel)]="user.value.email" name="email" required>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row">
+        <mat-form-field class="form-comment">
+          <textarea matInput placeholder="Commentaire" [(ngModel)]="user.value.comment" name="comment"></textarea>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card>
+
+  <app-accompanist-list [user]="user.value" (accompanistListChange)="formChange()"></app-accompanist-list>
+  <app-child-list [user]="user.value" (childListChange)="formChange()"></app-child-list>
+
+</mat-expansion-panel>
+
+

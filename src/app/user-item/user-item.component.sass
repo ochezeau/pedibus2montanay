@@ -1,0 +1,92 @@
+@import './../../app-theme'
+
+mat-action-row
+  button + button
+    margin-left: 15px
+
+mat-panel-title
+  margin: 0
+
+mat-expansion-panel-header
+  font-size: 14px !important
+
+.header-expanded
+  color: white
+  background: linear-gradient(to right, mat-color($app-primary), white)
+  padding: 5px
+  font-size: 14px !important
+
+.header-formUpdate
+  color: #3f51b5
+
+.panel-expanded
+  margin-top: 15px
+  margin-bottom: 15px
+  border: 1px solid #3f51b5
+
+.panel-expanded-updated
+  border: 1px solid green
+
+.panel-expanded-invalid
+  border: 1px solid red
+
+mat-form-field + mat-form-field
+  margin-left: 10px
+
+.form-comment
+  min-width: 700px !important
+
+.form-email
+  min-width: 300px !important
+
+.form-name
+  min-width: 150px !important
+
+.header-icon-button
+  height: 25px
+  width: 25px
+  mat-icon
+    vertical-align: top
+
+.header-icon-button + .header-icon-button
+  margin-left: 15px
+
+.user-summary
+  font-size: 13px
+
+.user-summary-person
+  display: inline-block
+  min-width: 100px
+  color: mat-color($app-primary)
+
+.user-summary-day:not(:last-of-type)
+  display: inline-block
+  min-width: 200px
+
+.user-summary-day-lundi
+  color: mat-color(mat-palette($mat-grey))
+
+.user-summary-day-mardi
+  color: mat-color(mat-palette($mat-pink))
+
+.user-summary-day-mercredi
+  color: mat-color(mat-palette($mat-purple))
+
+.user-summary-day-jeudi
+  color: mat-color(mat-palette($mat-blue))
+
+.user-summary-day-vendredi
+  color: mat-color(mat-palette($mat-green))
+
+.header-name
+  min-width: 160px
+
+.header-name-close
+  color: mat-color($app-primary)
+
+.ico-exception
+  position: relative
+  top: 3px
+  height: 30px
+  width: 15px
+  font-size: 16px

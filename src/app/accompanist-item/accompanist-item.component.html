@@ -1,0 +1,9 @@
+<form #f="ngForm">
+  <mat-form-field>
+    <input matInput placeholder="Prénom" [(ngModel)]="accompanist.firstName" name="firstName" required>
+  </mat-form-field>
+  <mat-form-field class="form-phone">
+    <input matInput placeholder="Tel" [(ngModel)]="accompanist.phone" name="phone">
+  </mat-form-field>
+  <app-form-days [person]="accompanist" (change)="dayChange()" (delete)="deleteAccompanist()"></app-form-days>
+</form>

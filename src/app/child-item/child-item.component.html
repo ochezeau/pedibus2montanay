@@ -1,0 +1,13 @@
+<form #f="ngForm">
+  <mat-form-field>
+    <input matInput placeholder="Prénom" [(ngModel)]="child.firstName" name="firstName" required>
+  </mat-form-field>
+
+  <mat-form-field class="select-classe">
+    <mat-select placeholder="Classe" [(ngModel)]="child.classe" name="classe" required>
+      <mat-option></mat-option>
+      <mat-option [value]="cl" *ngFor="let cl of classes">{{classe[cl]}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <app-form-days [person]="child" (change)="dayChange()" (delete)="deleteChild()"></app-form-days>
+</form>

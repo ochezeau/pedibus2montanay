@@ -1,0 +1,68 @@
+<mat-form-field class="select-day">
+  <mat-select placeholder="L" [(ngModel)]="person.monday" name="monday" (change)="dayChange()">
+    <mat-option></mat-option>
+    <mat-option [value]="r" *ngFor="let r of rides">{{ride[r]}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="select-day">
+  <mat-select placeholder="M" [(ngModel)]="person.tuesday" name="tuesday" (change)="dayChange()">
+    <mat-option></mat-option>
+    <mat-option [value]="r" *ngFor="let r of rides">{{ride[r]}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="select-day">
+  <mat-select placeholder="M" [(ngModel)]="person.wednesday" name="wednesday" (change)="dayChange()">
+    <mat-option></mat-option>
+    <mat-option [value]="r" *ngFor="let r of rides">{{ride[r]}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="select-day">
+  <mat-select placeholder="J" [(ngModel)]="person.thursday" name="thursday" (change)="dayChange()">
+    <mat-option></mat-option>
+    <mat-option [value]="r" *ngFor="let r of rides">{{ride[r]}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="select-day">
+  <mat-select placeholder="V" [(ngModel)]="person.friday" name="friday" (change)="dayChange()">
+    <mat-option></mat-option>
+    <mat-option [value]="r" *ngFor="let r of rides">{{ride[r]}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<button mat-icon-button class="delete-person" (click)="deletePerson()">
+  <mat-icon class="mat-small-icon">delete</mat-icon>
+</button>
+
+<span class="label-exception">Exception :&nbsp;</span>
+<mat-form-field class="select-day">
+  <mat-select placeholder="L" [(ngModel)]="person.exMonday" name="exMonday" (change)="dayChange()">
+    <mat-option></mat-option>
+    <mat-option [value]="r" *ngFor="let r of rides">{{ride[r]}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="select-day">
+  <mat-select placeholder="M" [(ngModel)]="person.exTuesday" name="exTuesday" (change)="dayChange()">
+    <mat-option></mat-option>
+    <mat-option [value]="r" *ngFor="let r of rides">{{ride[r]}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="select-day">
+  <mat-select placeholder="M" [(ngModel)]="person.exWednesday" name="exWednesday" (change)="dayChange()">
+    <mat-option></mat-option>
+    <mat-option [value]="r" *ngFor="let r of rides">{{ride[r]}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="select-day">
+  <mat-select placeholder="J" [(ngModel)]="person.exThursday" name="exThursday" (change)="dayChange()">
+    <mat-option></mat-option>
+    <mat-option [value]="r" *ngFor="let r of rides">{{ride[r]}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="select-day">
+  <mat-select placeholder="V" [(ngModel)]="person.exFriday" name="exFriday" (change)="dayChange()">
+    <mat-option></mat-option>
+    <mat-option [value]="r" *ngFor="let r of rides">{{ride[r]}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<button mat-icon-button class="delete-person" (click)="clearException()">
+  <mat-icon class="mat-small-icon">clear</mat-icon>
+</button>

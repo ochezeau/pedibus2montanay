@@ -1,0 +1,18 @@
+<mat-card class="small-card">
+  <mat-card-header>
+    <mat-card-title>
+      Accompagnateurs
+      <button mat-icon-button (click)="addAccompanist()">
+        <mat-icon class="mat-small-icon">add</mat-icon>
+      </button>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let a of user.accompanists; index as i">
+        <app-accompanist-item [accompanist]="a" (delete)="deleteAccompanist(i)"
+                              (formChange)="accompanistFormChange()"></app-accompanist-item>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
