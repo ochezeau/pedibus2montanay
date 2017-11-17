@@ -3,12 +3,12 @@
     <mat-card-title>Authentification</mat-card-title>
     <mat-card-content>
       <div fxLayout="row">
-        <mat-form-field>
+        <mat-form-field class="login-field">
           <input matInput placeholder="Login" type="email" [(ngModel)]="credentials.login" name="login" required>
         </mat-form-field>
       </div>
       <div fxLayout="row">
-        <mat-form-field>
+        <mat-form-field class="login-field">
           <input matInput placeholder="Mot de passe" type="password" [(ngModel)]="credentials.password" name="password" required>
         </mat-form-field>
       </div>

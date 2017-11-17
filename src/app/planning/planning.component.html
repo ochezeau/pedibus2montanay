@@ -2,7 +2,7 @@
 <ng-template #loaded>
   <mat-card class="setting">
     <span class="title">Planning semaine {{current.week}} - {{current.year}}</span>
-    <mat-form-field class="select-day">
+    <mat-form-field class="select-day-planning">
       <mat-select placeholder="Jours" multiple [(ngModel)]="current.days" name="days">
         <mat-option value="Lundi">Lundi</mat-option>
         <mat-option value="Mardi">Mardi</mat-option>
@@ -28,6 +28,7 @@
         <td class="mat-elevation-z1 day-row-{{d.day.toLowerCase()}}" align="center">{{d.day}}</td>
         <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
           <div [innerHTML]="d.fAccompanists | personList"></div>
+          <div class="count">{{d.fAccompanists.length}}</div>
           <div *ngIf="misAccompanistCount(d.fAccompanists,d.fChilds)" class="miss-acompagnist">
             <mat-icon>warning</mat-icon>
             <span>Manque {{misAccompanistCount(d.fAccompanists,d.fChilds)}} accompagnateur(s)</span>
@@ -35,9 +36,11 @@
         </td>
         <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
           <div [innerHTML]="d.fChilds | personList"></div>
+          <div class="count">{{d.fChilds.length}}</div>
         </td>
         <td class="mat-elevation-z1  list-td day-cell-{{d.day.toLowerCase()}}">
           <div [innerHTML]="d.pAccompanists | personList"></div>
+          <div class="count">{{d.pAccompanists.length}}</div>
           <div *ngIf="misAccompanistCount(d.pAccompanists,d.pChilds)" class="miss-acompagnist">
             <mat-icon>warning</mat-icon>
             <span>Manque {{misAccompanistCount(d.pAccompanists,d.pChilds)}} accompagnateur(s)</span>
@@ -45,9 +48,11 @@
         </td>
         <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
           <div [innerHTML]="d.pChilds | personList"></div>
+          <div class="count">{{d.pChilds.length}}</div>
         </td>
         <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
           <div [innerHTML]="d.bAccompanists | personList"></div>
+          <div class="count">{{d.bAccompanists.length}}</div>
           <div *ngIf="misAccompanistCount(d.bAccompanists,d.bChilds)" class="miss-acompagnist">
             <mat-icon>warning</mat-icon>
             <span>Manque {{misAccompanistCount(d.bAccompanists,d.bChilds)}} accompagnateur(s)</span>
@@ -55,6 +60,7 @@
         </td>
         <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
           <div [innerHTML]="d.bChilds | personList"></div>
+          <div class="count">{{d.bChilds.length}}</div>
         </td>
       </tr>
     </ng-container>
