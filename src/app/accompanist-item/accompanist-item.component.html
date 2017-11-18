@@ -5,5 +5,5 @@
   <mat-form-field class="form-phone">
     <input matInput placeholder="Tel" [(ngModel)]="accompanist.phone" name="phone">
   </mat-form-field>
-  <app-form-days [person]="accompanist" (change)="dayChange()" (delete)="deleteAccompanist()"></app-form-days>
+  <app-form-days [person]="accompanist" (change)="dayChange()" (delete)="deleteAccompanist()" personeType="accompanist"></app-form-days>
 </form>

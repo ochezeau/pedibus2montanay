@@ -1,19 +1,23 @@
-import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
-import {Person, Ride} from '../app.model';
-import {ControlContainer} from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from "@angular/core";
+import { Person, PersonType, Ride, RideAccompanist, RideChild, RideEx } from "../app.model";
+import { ControlContainer } from "@angular/forms";
 
 @Component({
-  selector: 'app-form-days',
-  templateUrl: './form-days.component.html',
-  styleUrls: ['./form-days.component.sass'],
+  selector: "app-form-days",
+  templateUrl: "./form-days.component.html",
+  styleUrls: ["./form-days.component.sass"],
   encapsulation: ViewEncapsulation.None
 })
-export class FormDaysComponent {
-  private ride = Ride;
-  public rides = [];
+export class FormDaysComponent implements OnInit {
+  public ride = Ride;
+  public ridesEx = [];
+  public ridePerson: Array<string>;
 
   @Input()
   public person: Person;
+
+  @Input()
+  public personeType: PersonType;
 
   @Output()
   public change = new EventEmitter<void>();
@@ -21,9 +25,16 @@ export class FormDaysComponent {
   @Output()
   public delete = new EventEmitter<void>();
 
-
   constructor(private container: ControlContainer) {
-    this.rides = Object.keys(this.ride);
+  }
+
+  public ngOnInit(): void {
+    this.ridesEx = Object.keys(this.ride).filter(r => RideEx.includes(Ride[r]));
+    if (this.personeType === "child") {
+      this.ridePerson = Object.keys(this.ride).filter(r => RideChild.includes(Ride[r]));
+    } else {
+      this.ridePerson = Object.keys(this.ride).filter(r => RideAccompanist.includes(Ride[r]));
+    }
   }
 
   public dayChange(): void {

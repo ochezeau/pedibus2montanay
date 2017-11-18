@@ -4,7 +4,7 @@ import { PlanningService } from "../service/planning.service";
 import * as moment from "moment";
 import { DatabaseWrapper, DayPlanning, Person, Planning, PlanningType } from "../app.model";
 import { NotifService } from "../service/notif.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-planning",
@@ -21,7 +21,7 @@ export class PlanningComponent implements OnInit {
   public historySelected: string;
 
   constructor(private userService: UserService, private planningService: PlanningService,
-              private notifService: NotifService, private routeResolver: ActivatedRoute) {
+              private notifService: NotifService, private routeResolver: ActivatedRoute, private router: Router) {
   }
 
   public ngOnInit(): void {
@@ -66,6 +66,7 @@ export class PlanningComponent implements OnInit {
     this.planningService.savePlanning(this.current, this.planning).then(() => {
       this.notifService.show("Planning " + this.planningService.getKeyPlanning(this.current) + " sauvé");
       this.planningService.deleteCurrent();
+      this.router.navigate(["/history"]);
     });
   }
 
@@ -110,7 +111,7 @@ export class PlanningComponent implements OnInit {
 
   private initForHistory(): void {
     this.planningService.getHistory().subscribe(h => {
-      this.history = h;
+      this.history = h.reverse();
       if (this.history.length > 0) {
         this.historySelected = this.history[0].key;
         this.selectPlanning();

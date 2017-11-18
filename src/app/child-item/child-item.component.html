@@ -9,5 +9,5 @@
       <mat-option [value]="cl" *ngFor="let cl of classes">{{classe[cl]}}</mat-option>
     </mat-select>
   </mat-form-field>
-  <app-form-days [person]="child" (change)="dayChange()" (delete)="deleteChild()"></app-form-days>
+  <app-form-days [person]="child" (change)="dayChange()" (delete)="deleteChild()" personeType="child"></app-form-days>
 </form>
