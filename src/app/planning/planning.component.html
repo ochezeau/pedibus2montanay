@@ -1,9 +1,16 @@
 <mat-progress-bar mode="indeterminate" *ngIf="showSpinner; else loaded" class="user-loading"></mat-progress-bar>
 <ng-template #loaded>
+  <button mat-fab color="accent" class="action-planning" (click)="savePlanning()" *ngIf="type=='current'">
+    <mat-icon class="mat-24">save</mat-icon>
+  </button>
+  <button mat-fab color="accent" class="action-planning" (click)="printPlanning()" *ngIf="type=='history'">
+    <mat-icon class="mat-24">print</mat-icon>
+  </button>
+
   <mat-card class="setting-planning">
     <span class="title-planning">Planning semaine {{current.week}} - {{current.year}}</span>
-    <mat-form-field class="select-day-planning">
-      <mat-select placeholder="Jours" multiple [(ngModel)]="current.days" name="days">
+    <mat-form-field class="select-day-planning" *ngIf="type === 'current'">
+      <mat-select placeholder="Jours" multiple [(ngModel)]="current.days" name="days" (change)="updateCurrent()">
         <mat-option value="Lundi">Lundi</mat-option>
         <mat-option value="Mardi">Mardi</mat-option>
         <mat-option value="Mercredi">Mercredi</mat-option>
@@ -12,7 +19,14 @@
       </mat-select>
     </mat-form-field>
 
-    <button mat-icon-button (click)="clearDays()">
+
+    <mat-form-field class="select-history-planning" *ngIf="type === 'history'">
+      <mat-select placeholder="Planning" (change)="selectPlanning()" [(ngModel)]="historySelected">
+        <mat-option *ngFor="let p of getHistoryKeys()" [value]="p">{{p}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-icon-button (click)="clearDays()" *ngIf="type === 'current'">
       <mat-icon class="clear-ico">clear</mat-icon>
     </button>
   </mat-card>
@@ -23,12 +37,12 @@
       <th class="mat-elevation-z1 stop-th" colspan="2">Poype</th>
       <th class="mat-elevation-z1 stop-th" colspan="2">Barmelle</th>
     </tr>
-    <ng-container *ngFor="let d of planning.days">
+    <ng-container *ngFor="let d of planning">
       <tr *ngIf="isDay(d.day)">
         <td class="mat-elevation-z1 day-row-{{d.day.toLowerCase()}}" align="center">{{d.day}}</td>
         <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
           <div [innerHTML]="d.fAccompanists | personList"></div>
-          <div class="count">{{d.fAccompanists.length}}</div>
+          <div class="count">{{getCount(d.fAccompanists)}}</div>
           <div *ngIf="misAccompanistCount(d.fAccompanists,d.fChilds)" class="miss-acompagnist">
             <mat-icon>warning</mat-icon>
             <span>Manque {{misAccompanistCount(d.fAccompanists,d.fChilds)}} accompagnateur(s)</span>
@@ -36,11 +50,11 @@
         </td>
         <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
           <div [innerHTML]="d.fChilds | personList"></div>
-          <div class="count">{{d.fChilds.length}}</div>
+          <div class="count">{{getCount(d.fChilds)}}</div>
         </td>
         <td class="mat-elevation-z1  list-td day-cell-{{d.day.toLowerCase()}}">
           <div [innerHTML]="d.pAccompanists | personList"></div>
-          <div class="count">{{d.pAccompanists.length}}</div>
+          <div class="count">{{getCount(d.pAccompanists)}}</div>
           <div *ngIf="misAccompanistCount(d.pAccompanists,d.pChilds)" class="miss-acompagnist">
             <mat-icon>warning</mat-icon>
             <span>Manque {{misAccompanistCount(d.pAccompanists,d.pChilds)}} accompagnateur(s)</span>
@@ -48,11 +62,11 @@
         </td>
         <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
           <div [innerHTML]="d.pChilds | personList"></div>
-          <div class="count">{{d.pChilds.length}}</div>
+          <div class="count">{{getCount(d.pChilds)}}</div>
         </td>
         <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
           <div [innerHTML]="d.bAccompanists | personList"></div>
-          <div class="count">{{d.bAccompanists.length}}</div>
+          <div class="count">{{getCount(d.bAccompanists)}}</div>
           <div *ngIf="misAccompanistCount(d.bAccompanists,d.bChilds)" class="miss-acompagnist">
             <mat-icon>warning</mat-icon>
             <span>Manque {{misAccompanistCount(d.bAccompanists,d.bChilds)}} accompagnateur(s)</span>
@@ -60,7 +74,7 @@
         </td>
         <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
           <div [innerHTML]="d.bChilds | personList"></div>
-          <div class="count">{{d.bChilds.length}}</div>
+          <div class="count">{{getCount(d.bChilds)}}</div>
         </td>
       </tr>
     </ng-container>

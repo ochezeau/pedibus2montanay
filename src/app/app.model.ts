@@ -58,11 +58,6 @@ export abstract class Person {
   exFriday: Ride;
 }
 
-export class Planning {
-  week: string;
-  days: Array<DayPlanning> = [];
-}
-
 export class DayPlanning {
   day: string;
   fAccompanists: Array<string>;
@@ -102,11 +97,14 @@ export class UsersFilter {
   person: string;
 }
 
-export class CurrentPlanning {
+export class Planning {
   week: number;
   year: number;
   days: Array<string> = [];
+  planning: Array<DayPlanning>;
 }
+
+export type PlanningType = "current" | "history";
 
 export class Credentials {
   login: string;

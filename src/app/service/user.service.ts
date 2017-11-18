@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { DatabaseWrapper, DayPlanning, Person, PersonPlanning, Planning, Ride, User } from "../app.model";
+import { DatabaseWrapper, DayPlanning, Person, PersonPlanning, Ride, User } from "../app.model";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
 import { Observable } from "rxjs/Observable";
 
@@ -40,13 +40,13 @@ export class UserService {
     return this.usersObs;
   }
 
-  public toPlanning(users: Array<DatabaseWrapper<User>>): Planning {
-    const p = new Planning();
-    p.days.push(this.getDayPlanning("monday", "Lundi", users));
-    p.days.push(this.getDayPlanning("tuesday", "Mardi", users));
-    p.days.push(this.getDayPlanning("wednesday", "Mercredi", users));
-    p.days.push(this.getDayPlanning("thursday", "Jeudi", users));
-    p.days.push(this.getDayPlanning("friday", "Vendredi", users));
+  public toPlanning(users: Array<DatabaseWrapper<User>>): Array<DayPlanning> {
+    const p: Array<DayPlanning> = [];
+    p.push(this.getDayPlanning("monday", "Lundi", users));
+    p.push(this.getDayPlanning("tuesday", "Mardi", users));
+    p.push(this.getDayPlanning("wednesday", "Mercredi", users));
+    p.push(this.getDayPlanning("thursday", "Jeudi", users));
+    p.push(this.getDayPlanning("friday", "Vendredi", users));
     return p;
   }
 

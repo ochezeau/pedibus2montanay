@@ -1,19 +1,50 @@
-import {Injectable} from '@angular/core';
-import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
-import {CurrentPlanning} from '../app.model';
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from "@angular/core";
+import { AngularFireDatabase } from "angularfire2/database";
+import { Observable } from "rxjs/Observable";
+import { DatabaseWrapper, DayPlanning, Planning } from "../app.model";
 
 @Injectable()
 export class PlanningService {
-  private currentRef: AngularFireList<CurrentPlanning>;
-  private currentObs: Observable<CurrentPlanning>;
 
-  private readonly USER_PATH = 'planning/current';
+  private readonly CURRENT_PATH = "planning/current";
+  private readonly HISTORY_PATH = "planning/history";
 
   constructor(private db: AngularFireDatabase) {
   }
 
-  public getCurrent(): Observable<CurrentPlanning> {
-    return this.db.object(this.USER_PATH).valueChanges();
+  public getCurrent(): Observable<Planning> {
+    return this.db.object(this.CURRENT_PATH).valueChanges();
   }
+
+  public setCurrent(current: Planning): Promise<void> {
+    console.log("set.......");
+    return this.db.object(this.CURRENT_PATH).update(current);
+  }
+
+  public deleteCurrent(): Promise<void> {
+    return this.db.object(this.CURRENT_PATH).remove();
+  }
+
+  public savePlanning(current: Planning, dayPlanning: Array<DayPlanning>): Promise<void> {
+    const toSave = this.cloneCurrent(current);
+    toSave.planning = dayPlanning;
+    return this.db.object(this.HISTORY_PATH + "/" + this.getKeyPlanning(current)).update(toSave);
+  }
+
+  public getKeyPlanning(p: Planning): string {
+    return p.year + "-" + p.week;
+  }
+
+  public cloneCurrent(current: Planning): Planning {
+    return JSON.parse(JSON.stringify(current));
+  }
+
+  public getHistory(): Observable<Array<DatabaseWrapper<Planning>>> {
+    return this.db.list(this.HISTORY_PATH).snapshotChanges().map(changes => {
+      return changes.map(c => {
+        return {key: c.payload.key, value: c.payload.val()};
+      });
+    });
+  }
+
 }

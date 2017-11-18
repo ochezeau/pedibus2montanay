@@ -8,7 +8,8 @@ import { LoginComponent } from "./login/login.component";
 const appRoutes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "users", component: UserListComponent, canActivate: [AuthGuard]},
-  {path: "planning", component: PlanningComponent, canActivate: [AuthGuard]},
+  {path: "planning", component: PlanningComponent, canActivate: [AuthGuard], data: {type: "current"}},
+  {path: "history", component: PlanningComponent, canActivate: [AuthGuard], data: {type: "history"}},
   {path: "**", component: UserListComponent, canActivate: [AuthGuard]}
 ];
 

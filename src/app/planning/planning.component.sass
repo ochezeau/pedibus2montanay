@@ -74,7 +74,7 @@ table
   position: relative
   top: 5px
 
-.select-day-planning
+.select-day-planning, .select-history-planning
   margin-left: 50px
   font-size: 12px
   min-width: 250px !important
@@ -95,6 +95,22 @@ table
   text-align: center
   padding-top: 2px
 
+.action-planning
+  position: fixed !important
+  top: 35px
+  right: 35px
+  z-index: 1500
+
 @media print
   .clear-ico, .select-day
     visibility: hidden !important
+
+  .action-planning, .select-history-planning
+    display: none !important
+
+  .title-planning
+    margin-bottom: 5px !important
+    display: inline-block
+    width: 100%
+    text-align: center
+
