@@ -1,0 +1,25 @@
+<mat-progress-bar mode="indeterminate" *ngIf="showSpinner; else loaded"></mat-progress-bar>
+<ng-template #loaded>
+  <button mat-fab color="accent" class="action-contact" (click)="printContacts()">
+    <mat-icon class="mat-24">print</mat-icon>
+  </button>
+  <mat-list>
+    <mat-list-item *ngFor="let u of users" class="contact-item">
+      <span class="contact-span-famille">{{u.value.name}}</span>
+      <span class="contact-email">{{u.value.email}}</span>
+      <span *ngIf="u.value.accompanists && u.value.accompanists.length >0" class="contact-span-acc">
+      <span *ngFor="let a of u.value.accompanists; last as isLast">
+        {{a.firstName}}: {{a.phone}}
+        <span *ngIf="!isLast">,&nbsp;</span>
+      </span>
+    </span>
+
+      <span *ngIf="u.value.childs && u.value.childs.length >0" class="contact-span-child">
+      <span *ngFor="let c of u.value.childs; last as isLast">
+        {{c.firstName}}: {{c.classe}}
+        <span *ngIf="!isLast">,&nbsp;</span>
+      </span>
+    </span>
+    </mat-list-item>
+  </mat-list>
+</ng-template>
