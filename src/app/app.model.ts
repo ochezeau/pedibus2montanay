@@ -55,12 +55,15 @@ export abstract class Person {
 
 export class DayPlanning {
   day: string;
-  fAccompanists: Array<string>;
-  fChilds: Array<string>;
-  pAccompanists: Array<string>;
-  pChilds: Array<string>;
-  bAccompanists: Array<string>;
-  bChilds: Array<string>;
+  fAccompanists: Array<PersonPlanning>;
+  fTel: Array<PersonPlanning>;
+  fChilds: Array<PersonPlanning>;
+  pAccompanists: Array<PersonPlanning>;
+  pTel: Array<PersonPlanning>;
+  pChilds: Array<PersonPlanning>;
+  bAccompanists: Array<PersonPlanning>;
+  bTel: Array<PersonPlanning>;
+  bChilds: Array<PersonPlanning>;
 
 }
 
@@ -70,14 +73,18 @@ export class Accompanist extends Person {
 }
 
 export class PersonPlanning {
-  fullName: string;
+  familly: string;
+  firstName: string;
+  phone: string;
+}
+
+export class PersonPlanningDay extends PersonPlanning {
   monday: Ride;
   tuesday: Ride;
   wednesday: Ride;
   thursday: Ride;
   friday: Ride;
 }
-
 
 export class Child extends Person {
   firstName: string;

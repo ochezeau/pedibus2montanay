@@ -30,7 +30,7 @@
       <mat-icon class="clear-ico">clear</mat-icon>
     </button>
   </mat-card>
-  <table cellpadding=5 cellspacing=3>
+  <table cellpadding=3 cellspacing=2>
     <tr>
       <th class="day-col"></th>
       <th class="mat-elevation-z1 stop-th" colspan="2">Ferrièren <span class="stop-hour">(8h00)</span></th>
@@ -40,7 +40,7 @@
     <ng-container *ngFor="let d of planning; index as i">
       <tr *ngIf="isDay(d.day)">
         <td class="mat-elevation-z1 day-row-{{d.day.toLowerCase()}}" align="center">{{d.day}}<br/>{{getDayNumber(i)}}</td>
-        <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
+        <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}" valign="top">
           <div [innerHTML]="d.fAccompanists | personList"></div>
           <div class="count">{{getCount(d.fAccompanists)}}</div>
           <div *ngIf="misAccompanistCount(d.fAccompanists,d.fChilds)" class="miss-acompagnist">
@@ -48,11 +48,11 @@
             <span>Manque {{misAccompanistCount(d.fAccompanists,d.fChilds)}} accompagnateur(s)</span>
           </div>
         </td>
-        <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
+        <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}" valign="top">
           <div [innerHTML]="d.fChilds | personList"></div>
           <div class="count">{{getCount(d.fChilds)}}</div>
         </td>
-        <td class="mat-elevation-z1  list-td day-cell-{{d.day.toLowerCase()}}">
+        <td class="mat-elevation-z1  list-td day-cell-{{d.day.toLowerCase()}}" valign="top">
           <div [innerHTML]="d.pAccompanists | personList"></div>
           <div class="count">{{getCount(d.pAccompanists)}}</div>
           <div *ngIf="misAccompanistCount(d.pAccompanists,d.pChilds)" class="miss-acompagnist">
@@ -60,11 +60,11 @@
             <span>Manque {{misAccompanistCount(d.pAccompanists,d.pChilds)}} accompagnateur(s)</span>
           </div>
         </td>
-        <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
+        <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}" valign="top">
           <div [innerHTML]="d.pChilds | personList"></div>
           <div class="count">{{getCount(d.pChilds)}}</div>
         </td>
-        <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
+        <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}" valign="top">
           <div [innerHTML]="d.bAccompanists | personList"></div>
           <div class="count">{{getCount(d.bAccompanists)}}</div>
           <div *ngIf="misAccompanistCount(d.bAccompanists,d.bChilds)" class="miss-acompagnist">
@@ -72,7 +72,7 @@
             <span>Manque {{misAccompanistCount(d.bAccompanists,d.bChilds)}} accompagnateur(s)</span>
           </div>
         </td>
-        <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
+        <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}" valign="top">
           <div [innerHTML]="d.bChilds | personList"></div>
           <div class="count">{{getCount(d.bChilds)}}</div>
         </td>

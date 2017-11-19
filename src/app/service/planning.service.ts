@@ -26,7 +26,7 @@ export class PlanningService {
 
   public savePlanning(current: Planning, dayPlanning: Array<DayPlanning>): Promise<void> {
     const toSave = this.cloneCurrent(current);
-    toSave.planning = dayPlanning;
+    toSave.planning = this.cloneCurrent(dayPlanning);
     return this.db.object(this.HISTORY_PATH + "/" + this.getKeyPlanning(current)).update(toSave);
   }
 
@@ -34,8 +34,8 @@ export class PlanningService {
     return p.year + "-" + p.week;
   }
 
-  public cloneCurrent(current: Planning): Planning {
-    return JSON.parse(JSON.stringify(current));
+  public cloneCurrent<T>(object: T): T {
+    return JSON.parse(JSON.stringify(object));
   }
 
   public getHistory(): Observable<Array<DatabaseWrapper<Planning>>> {

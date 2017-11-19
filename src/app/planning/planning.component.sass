@@ -8,13 +8,15 @@ table
   font-weight: normal
   color: white
   background-color: mat-color($app-primary)
+  font-size: 12px
 
 .stop-hour
-  font-size: 12px
+  font-size: 10px
 
 @mixin day-row($color)
   background-color: mat-color(mat-palette($color))
   color: white
+  font-size: 12px
 
 .day-row-lundi
   @include day-row($mat-grey)
@@ -47,14 +49,14 @@ table
   border: 1px solid mat-color(mat-palette($mat-green))
 
 .day-col
-  width: 70px
+  width: 45px
 
 .list-td
-  font-size: 13px
+  font-size: 10px
   position: relative
 
 .miss-acompagnist
-  font-size: 12px
+  font-size: 10px
   color: mat-color(mat-palette($app-warn))
   span
     display: inline-block
@@ -117,3 +119,9 @@ table
     width: 100%
     text-align: center
 
+.v-name
+  width: 100%
+  padding: 3px 0 !important
+
+.v-name:not(:last-of-type)
+  border-bottom: 1px solid darkgrey

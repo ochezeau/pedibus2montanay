@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { DatabaseWrapper, DayPlanning, Person, PersonPlanning, Ride, User } from "../app.model";
+import { DatabaseWrapper, DayPlanning, Person, PersonPlanning, PersonPlanningDay, Ride, User } from "../app.model";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
 import { Observable } from "rxjs/Observable";
 
@@ -71,40 +71,50 @@ export class UserService {
     const dp = new DayPlanning();
     dp.day = strDay;
     dp.fAccompanists = this.personForDayAndRide(users, day, "accompanists", [Ride.FE, Ride.FP]);
+    dp.fTel = this.personForDayAndRide(users, day, "accompanists", [Ride.FE_Tel]);
     dp.fChilds = this.personForDayAndRide(users, day, "childs", [Ride.FE, Ride.FP]);
 
     dp.pAccompanists = this.personForDayAndRide(users, day, "accompanists", [Ride.FE, Ride.PE, Ride.PB]);
+    dp.pTel = this.personForDayAndRide(users, day, "accompanists", [Ride.PE_Tel]);
     dp.pChilds = this.personForDayAndRide(users, day, "childs", [Ride.FE, Ride.PE, Ride.PB]);
 
     dp.bAccompanists = this.personForDayAndRide(users, day, "accompanists", [Ride.FE, Ride.PE, , Ride.BE]);
+    dp.bTel = this.personForDayAndRide(users, day, "accompanists", [Ride.BE_Tel]);
     dp.bChilds = this.personForDayAndRide(users, day, "childs", [Ride.FE, Ride.PE, , Ride.BE]);
     return dp;
   }
 
-  private personForDayAndRide(users: Array<DatabaseWrapper<User>>, day: string, personeType: string, rides: Array<Ride>): Array<string> {
+  private personForDayAndRide(users: Array<DatabaseWrapper<User>>, day: string, personeType: string, rides: Array<Ride>): Array<PersonPlanning> {
     const persones = this.getAllPersonPlanning(personeType, users);
     return persones.filter(p => {
       if (!p[day]) {
         return false;
       }
       return rides.includes(p[day]);
-    }).map(p => p.fullName);
+    }).map(p => {
+      let pp = {familly: p.familly, firstName: p.firstName, phone: p.phone};
+      return pp;
+    });
   }
 
-  private getAllPersonPlanning(personType: string, users: Array<DatabaseWrapper<User>>): Array<PersonPlanning> {
-    return users.map(u => u.value).reduce((r: Array<PersonPlanning>, c: User) => {
+  private getAllPersonPlanning(personType: string, users: Array<DatabaseWrapper<User>>): Array<PersonPlanningDay> {
+    return users.map(u => u.value).reduce((r: Array<PersonPlanningDay>, c: User) => {
       r.push(...this.getPersonPlanningForUser(personType, c));
       return r;
     }, []);
   }
 
-  private getPersonPlanningForUser(personType: string, user: User): Array<PersonPlanning> {
+  private getPersonPlanningForUser(personType: string, user: User): Array<PersonPlanningDay> {
     if (!user[personType]) {
       return [];
     }
     return user[personType].map(p => {
-      const pp = new PersonPlanning();
-      pp.fullName = user.name + " " + p.firstName;
+      const pp = new PersonPlanningDay();
+      pp.firstName = p.firstName;
+      pp.familly = user.name;
+      if (personType === "accompanists") {
+        pp.phone = p.phone;
+      }
       pp.monday = this.getTrueRide(p, "monday");
       pp.tuesday = this.getTrueRide(p, "tuesday");
       pp.wednesday = this.getTrueRide(p, "wednesday");
