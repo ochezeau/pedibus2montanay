@@ -1,4 +1,4 @@
-<mat-progress-bar mode="indeterminate" *ngIf="showSpinner; else loaded" class="user-loading"></mat-progress-bar>
+<mat-progress-bar mode="indeterminate" *ngIf="showSpinner; else loaded"></mat-progress-bar>
 <ng-template #loaded>
   <button mat-fab color="accent" class="action-planning" (click)="savePlanning()" *ngIf="type=='current'">
     <mat-icon class="mat-24">save</mat-icon>
@@ -33,13 +33,13 @@
   <table cellpadding=5 cellspacing=3>
     <tr>
       <th class="day-col"></th>
-      <th class="mat-elevation-z1 stop-th" colspan="2">Ferrière</th>
-      <th class="mat-elevation-z1 stop-th" colspan="2">Poype</th>
-      <th class="mat-elevation-z1 stop-th" colspan="2">Barmelle</th>
+      <th class="mat-elevation-z1 stop-th" colspan="2">Ferrièren <span class="stop-hour">(8h00)</span></th>
+      <th class="mat-elevation-z1 stop-th" colspan="2">Poype <span class="stop-hour">(8h10)</span></th>
+      <th class="mat-elevation-z1 stop-th" colspan="2">Barmelle <span class="stop-hour">(8h15)</span></th>
     </tr>
-    <ng-container *ngFor="let d of planning">
+    <ng-container *ngFor="let d of planning; index as i">
       <tr *ngIf="isDay(d.day)">
-        <td class="mat-elevation-z1 day-row-{{d.day.toLowerCase()}}" align="center">{{d.day}}</td>
+        <td class="mat-elevation-z1 day-row-{{d.day.toLowerCase()}}" align="center">{{d.day}}<br/>{{getDayNumber(i)}}</td>
         <td class="mat-elevation-z1 list-td day-cell-{{d.day.toLowerCase()}}">
           <div [innerHTML]="d.fAccompanists | personList"></div>
           <div class="count">{{getCount(d.fAccompanists)}}</div>

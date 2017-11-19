@@ -33,7 +33,10 @@ export class PlanningComponent implements OnInit {
         this.initForHistory();
       }
     });
+  }
 
+  public getDayNumber(day: number): string {
+    return moment().day(day + 1).week(this.current.week).year(this.current.year).format("DD");
   }
 
   public misAccompanistCount(accompanists: Array<string>, childs: Array<string>): number {

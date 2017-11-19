@@ -29,6 +29,7 @@ import { UserListFilterPipe } from "./user-list/user-list-filter.pipe";
 import { PlanningService } from "./service/planning.service";
 import { LoginComponent } from "./login/login.component";
 import { AuthGuard } from "./service/auth.service";
+import { ContactsComponent } from "./contacts/contacts.component";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { AuthGuard } from "./service/auth.service";
     PersonListPipe,
     UserSummaryPersonPipe,
     UserListFilterPipe,
-    LoginComponent
+    LoginComponent,
+    ContactsComponent
   ],
   imports: [
     BrowserModule,

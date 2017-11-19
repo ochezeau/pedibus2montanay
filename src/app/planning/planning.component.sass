@@ -5,13 +5,16 @@ table
   width: 100%
 
 .stop-th
+  font-weight: normal
   color: white
   background-color: mat-color($app-primary)
+
+.stop-hour
+  font-size: 12px
 
 @mixin day-row($color)
   background-color: mat-color(mat-palette($color))
   color: white
-  font-weight: bold
 
 .day-row-lundi
   @include day-row($mat-grey)
