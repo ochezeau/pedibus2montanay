@@ -17,7 +17,6 @@ export class PlanningService {
   }
 
   public setCurrent(current: Planning): Promise<void> {
-    console.log("set.......");
     return this.db.object(this.CURRENT_PATH).update(current);
   }
 

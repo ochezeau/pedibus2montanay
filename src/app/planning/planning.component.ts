@@ -98,7 +98,8 @@ export class PlanningComponent implements OnInit {
           this.current.days = [];
         }
       } else {
-        const nextWeek = moment().add(moment.duration(1, "week"));
+        const nextWeek = moment().startOf("week").isoWeekday(1).add(moment.duration(1, "week"));
+        
         this.current = new Planning();
         this.current.week = nextWeek.week();
         this.current.year = nextWeek.year();
