@@ -46,7 +46,7 @@ export class PlanningListPersonComponent implements OnInit {
     const cCount = childs ? childs.length : 0;
     if (cCount / 7 > aCount) {
       const mod = cCount <= 7 ? 0 : cCount % 7;
-      return mod + 1 - aCount;
+      return (cCount - mod) % 7 - aCount;
     }
     return 0;
   }
