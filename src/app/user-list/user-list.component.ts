@@ -120,7 +120,7 @@ export class UserListComponent implements OnInit {
         persons.push(...u.value.childs);
       }
       if (persons.length === 0) {
-        return result;
+        return false;
       }
       return persons.filter(p => {
         return days.filter(d => (p[d] !== undefined || p[d] === undefined && days.length === 5 || p[this.userService.exProp(d)] !== undefined) && filter(d, p)).length > 0;
