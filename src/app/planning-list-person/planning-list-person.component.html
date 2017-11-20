@@ -5,6 +5,11 @@
     <span *ngIf="p.classe" class="person-cell-font">&nbsp;({{p.classe}})</span>
   </div>
 </div>
+<div *ngIf="type == 'accompanist' && misAccompanistCount()" [class.miss-acompagnist]="misAccompanistCount() > 0" [class.much-acompagnist]="misAccompanistCount() < 0">
+  <mat-icon>warning</mat-icon>
+  <span class="person-cell-font" *ngIf=" misAccompanistCount() > 0">Manque {{misAccompanistCount()}} accompagnateur(s)</span>
+  <span class="person-cell-font" *ngIf=" misAccompanistCount() < 0"> {{- misAccompanistCount()}} accompagnateur(s) de trop</span>
+</div>
 <div class="count person-cell-font" *ngIf="getCount() > 0">{{getCount()}}</div>
 <div class="list-person-name-tel" *ngIf="tels && tels.length>0 && persons && persons.length >0">
   <div class="item-person-name item-person-name-tel">
@@ -16,7 +21,3 @@
   </div>
 </div>
 <div class="count person-cell-font" *ngIf="getCount() > 0">{{getCount()}}</div>
-<div *ngIf="type == 'accompanist' && misAccompanistCount()" class="miss-acompagnist">
-  <mat-icon>warning</mat-icon>
-  <span class="person-cell-font">Manque {{misAccompanistCount()}} accompagnateur(s)</span>
-</div>
