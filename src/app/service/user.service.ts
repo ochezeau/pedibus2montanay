@@ -90,7 +90,8 @@ export class UserService {
       if (!p[day]) {
         return false;
       }
-      return rides.includes(p[day]);
+
+      return rides.includes(<any>Ride[p[day]]);
     }).map(p => {
       let pp = {familly: p.familly, firstName: p.firstName, phone: p.phone, classe: p.classe};
       return pp;

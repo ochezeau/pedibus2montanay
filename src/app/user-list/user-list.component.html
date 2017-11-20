@@ -1,7 +1,7 @@
 <mat-progress-bar mode="indeterminate" *ngIf="showSpinner; else loaded"></mat-progress-bar>
 <ng-template #loaded>
   <mat-card class="card-search">
-    <form class="form-search-list">
+    <form class="form-search-list" #f="ngForm">
       <mat-icon class="search-ico" color="primary">search</mat-icon>
       <mat-form-field>
         <input matInput placeholder="Famille" [(ngModel)]="filter.familly" name="familly">
@@ -46,7 +46,7 @@
     </form>
   </mat-card>
   <mat-accordion *ngIf="users?.length > 0">
-    <app-user-item [user]="u" [expanded]="expanded(u)" *ngFor="let u of users | userListFilter:filter"
+    <app-user-item [user]="u" [expanded]="expanded(u)" *ngFor="let u of filtredUsers"
                    (open)="panelOpen(u)"
                    (close)="panelClose(u)"></app-user-item>
   </mat-accordion>

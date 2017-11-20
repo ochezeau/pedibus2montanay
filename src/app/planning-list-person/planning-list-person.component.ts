@@ -18,6 +18,7 @@ export class PlanningListPersonComponent implements OnInit {
   public prefix: string;
 
   public persons: Array<PersonPlanningDay>;
+  public tels: Array<PersonPlanningDay>;
 
   constructor() {
   }
@@ -25,6 +26,10 @@ export class PlanningListPersonComponent implements OnInit {
   public ngOnInit(): void {
     const prop = this.type === "accompanist" ? "Accompanists" : "Childs";
     this.persons = this.planning[this.prefix + prop];
+
+    if (this.type === "accompanist") {
+      this.tels = this.planning[this.prefix + "Tel"];
+    }
   }
 
   public getCount(): number {

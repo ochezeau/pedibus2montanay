@@ -24,7 +24,6 @@ import { AccompanistListComponent } from "./accompanist-list/accompanist-list.co
 import { UserSummaryDayPipe } from "./user-item/user-summary-day.pipe";
 import { PlanningComponent } from "./planning/planning.component";
 import { UserSummaryPersonPipe } from "./user-item/user-summary-person.pipe";
-import { UserListFilterPipe } from "./user-list/user-list-filter.pipe";
 import { PlanningService } from "./service/planning.service";
 import { LoginComponent } from "./login/login.component";
 import { AuthGuard } from "./service/auth.service";
@@ -45,7 +44,6 @@ import { PlanningListPersonComponent } from "./planning-list-person/planning-lis
     UserSummaryDayPipe,
     PlanningComponent,
     UserSummaryPersonPipe,
-    UserListFilterPipe,
     LoginComponent,
     ContactsComponent,
     UserDeleteDialogComponent,
