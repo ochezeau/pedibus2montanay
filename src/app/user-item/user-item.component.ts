@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from "@angular/core";
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from "@angular/core";
 import { DatabaseWrapper, User } from "../app.model";
 import { NgForm } from "@angular/forms";
 import { UserService } from "../service/user.service";
@@ -13,7 +13,7 @@ import { UserDeleteDialogComponent } from "../user-delete-dialog/user-delete-dia
   templateUrl: "./user-item.component.html",
   styleUrls: ["./user-item.component.sass"]
 })
-export class UserItemComponent implements OnInit, OnChanges {
+export class UserItemComponent implements OnChanges {
 
   @Input()
   public user: DatabaseWrapper<User>;
@@ -43,10 +43,14 @@ export class UserItemComponent implements OnInit, OnChanges {
   constructor(private userService: UserService, private notifService: NotifService, private dialog: MatDialog) {
   }
 
-  public ngOnInit(): void {
-    this.form.valueChanges.subscribe(() => {
-      this.formChange();
-    });
+  @ViewChild("f")
+  public set itemForm(form: NgForm) {
+    this.form = form;
+    if (this.form) {
+      this.form.valueChanges.subscribe(() => {
+        this.formChange();
+      });
+    }
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -102,6 +106,9 @@ export class UserItemComponent implements OnInit, OnChanges {
 
   public get formInvalid(): boolean {
     if (this.deleting) {
+      return false;
+    }
+    if (!this.form) {
       return false;
     }
     return this.form.invalid || this.childListComponent.invalid || this.accompanistListComponent.invalid;

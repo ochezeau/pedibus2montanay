@@ -65,6 +65,10 @@ export class UserListComponent implements OnInit {
     this.userService.addUser(this.users).then(() => this.notifService.show("Nouvel utilisateur ajouté"));
   }
 
+  public trackByKey(_index: number, user: DatabaseWrapper<User>): string {
+    return user.key;
+  }
+
   public get invalid(): boolean {
     if (!this.userItemComponents) {
       return false;

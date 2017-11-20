@@ -51,27 +51,26 @@
     </ng-container>
   </mat-expansion-panel-header>
 
-  <mat-card>
-    <form #f="ngForm">
-      <div fxLayout="row">
-        <mat-form-field class="form-name">
-          <input matInput placeholder="Famille" [(ngModel)]="user.value.name" name="name" required>
-        </mat-form-field>
-        <mat-form-field class="form-email">
-          <input matInput placeholder="Email" [(ngModel)]="user.value.email" name="email">
-        </mat-form-field>
-      </div>
-      <div fxLayout="row">
-        <mat-form-field class="form-comment">
-          <textarea matInput placeholder="Commentaire" [(ngModel)]="user.value.comment" name="comment"></textarea>
-        </mat-form-field>
-      </div>
-    </form>
-  </mat-card>
+  <ng-container *ngIf="panel.expanded">
+    <mat-card>
+      <form #f="ngForm">
+        <div fxLayout="row">
+          <mat-form-field class="form-name">
+            <input matInput placeholder="Famille" [(ngModel)]="user.value.name" name="name" required>
+          </mat-form-field>
+          <mat-form-field class="form-email">
+            <input matInput placeholder="Email" [(ngModel)]="user.value.email" name="email">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row">
+          <mat-form-field class="form-comment">
+            <textarea matInput placeholder="Commentaire" [(ngModel)]="user.value.comment" name="comment"></textarea>
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-card>
 
-  <app-accompanist-list [user]="user.value" (accompanistListChange)="formChange()"></app-accompanist-list>
-  <app-child-list [user]="user.value" (childListChange)="formChange()"></app-child-list>
-
+    <app-accompanist-list [user]="user.value" (accompanistListChange)="formChange()"></app-accompanist-list>
+    <app-child-list [user]="user.value" (childListChange)="formChange()"></app-child-list>
+  </ng-container>
 </mat-expansion-panel>
-
-

@@ -46,7 +46,7 @@
     </form>
   </mat-card>
   <mat-accordion *ngIf="users?.length > 0">
-    <app-user-item [user]="u" [expanded]="expanded(u)" *ngFor="let u of filtredUsers"
+    <app-user-item [user]="u" [expanded]="expanded(u)" *ngFor="let u of filtredUsers; trackBy: trackByKey"
                    (open)="panelOpen(u)"
                    (close)="panelClose(u)"></app-user-item>
   </mat-accordion>

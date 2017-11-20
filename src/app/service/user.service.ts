@@ -1,23 +1,13 @@
 import { Injectable } from "@angular/core";
 import { DatabaseWrapper, DayPlanning, Person, PersonPlanning, PersonPlanningDay, Ride, User } from "../app.model";
-import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
+import { AngularFireDatabase } from "angularfire2/database";
 import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class UserService {
-  private usersRef: AngularFireList<User>;
-  private usersObs: Observable<Array<DatabaseWrapper<User>>>;
-  private updateing = false;
-
   private readonly USER_PATH = "users";
 
   constructor(private db: AngularFireDatabase) {
-    this.usersRef = this.db.list(this.USER_PATH);
-    this.usersObs = this.usersRef.snapshotChanges().map(changes => {
-      return changes.map(c => {
-        return {key: c.payload.key, value: c.payload.val()};
-      });
-    });
   }
 
   public addUser(users: Array<DatabaseWrapper<User>>): Promise<void> {
@@ -33,7 +23,7 @@ export class UserService {
     safeUser.accompanists = this.capitalizeList(safeUser.accompanists);
     safeUser.childs = this.capitalizeList(safeUser.childs);
     safeUser = JSON.parse(JSON.stringify(safeUser)); // remove undefined value
-    return this.usersRef.update(user.key, safeUser);
+    return this.db.list(this.USER_PATH).update(user.key, safeUser);
   }
 
   private capitalizeList(list: Array<any>): Array<any> {
@@ -51,7 +41,11 @@ export class UserService {
   }
 
   public getUsers(): Observable<Array<DatabaseWrapper<User>>> {
-    return this.usersObs;
+    return this.db.list(this.USER_PATH).snapshotChanges().map(changes => {
+      return changes.map(c => {
+        return {key: c.payload.key, value: c.payload.val()};
+      });
+    });
   }
 
   public sort(a: DatabaseWrapper<User>, b: DatabaseWrapper<User>): number {
