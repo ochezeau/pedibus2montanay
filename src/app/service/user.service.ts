@@ -28,10 +28,11 @@ export class UserService {
   }
 
   public updateUser(user: DatabaseWrapper<User>): Promise<void> {
-    const safeUser = JSON.parse(JSON.stringify(user.value)); // remove undefined value
+    let safeUser = user.value;
     safeUser.name = safeUser.name.toUpperCase();
     safeUser.accompanists = this.capitalizeList(safeUser.accompanists);
     safeUser.childs = this.capitalizeList(safeUser.childs);
+    safeUser = JSON.parse(JSON.stringify(safeUser)); // remove undefined value
     return this.usersRef.update(user.key, safeUser);
   }
 
