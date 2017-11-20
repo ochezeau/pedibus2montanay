@@ -23,13 +23,26 @@ export class UserService {
   public addUser(users: Array<DatabaseWrapper<User>>): Promise<void> {
     const maxKey = users.length === 0 ? 0 : parseInt(Math.max.apply(Math, users.map(u => u.key)), 10) + 1;
     const nUser = new User();
-    nUser.name = "Famille : " + maxKey;
+    nUser.name = " Famille : " + maxKey;
     return this.db.object(this.USER_PATH + "/" + maxKey).set(nUser);
   }
 
   public updateUser(user: DatabaseWrapper<User>): Promise<void> {
     const safeUser = JSON.parse(JSON.stringify(user.value)); // remove undefined value
+    safeUser.name = safeUser.name.toUpperCase();
+    safeUser.accompanists = this.capitalizeList(safeUser.accompanists);
+    safeUser.childs = this.capitalizeList(safeUser.childs);
     return this.usersRef.update(user.key, safeUser);
+  }
+
+  private capitalizeList(list: Array<any>): Array<any> {
+    if (list) {
+      list.map(p => {
+        p.firstName = this.capitalize(p.firstName = p.firstName.toLowerCase());
+        return p;
+      });
+    }
+    return list;
   }
 
   public deleteUser(user: DatabaseWrapper<User>): Promise<void> {
@@ -38,6 +51,14 @@ export class UserService {
 
   public getUsers(): Observable<Array<DatabaseWrapper<User>>> {
     return this.usersObs;
+  }
+
+  public sort(a: DatabaseWrapper<User>, b: DatabaseWrapper<User>): number {
+    if (a.value.name.toLowerCase() < b.value.name.toLowerCase())
+      return -1;
+    if (a.value.name.toLowerCase() > b.value.name.toLowerCase())
+      return 1;
+    return 0;
   }
 
   public toPlanning(users: Array<DatabaseWrapper<User>>): Array<DayPlanning> {

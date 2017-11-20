@@ -30,7 +30,7 @@ export class UserListComponent implements OnInit {
     this.userService.getUsers().subscribe((r) => {
       this.showSpinner = false;
       this.users = r;
-      this.filtredUsers = this.users;
+      this.filtredUsers = this.users.sort(this.userService.sort);
     });
   }
 
@@ -96,7 +96,7 @@ export class UserListComponent implements OnInit {
       result = this.filterForDay(this.filter, days, result, (d, p) => this.contains(p, d, this.filter.occasional));
     }
 
-    this.filtredUsers = result;
+    this.filtredUsers = result.sort(this.userService.sort);
   }
 
   private startWith(p: Person, day: string, value: string): boolean {
@@ -123,7 +123,7 @@ export class UserListComponent implements OnInit {
         return result;
       }
       return persons.filter(p => {
-        return days.filter(d => (p[d] !== undefined || p[this.userService.exProp(d)] !== undefined) && filter(d, p)).length > 0;
+        return days.filter(d => (p[d] !== undefined || p[d] === undefined && days.length === 5 || p[this.userService.exProp(d)] !== undefined) && filter(d, p)).length > 0;
       }).length > 0;
     });
   }
