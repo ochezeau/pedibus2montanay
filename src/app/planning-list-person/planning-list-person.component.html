@@ -1,0 +1,12 @@
+<div class="list-person-name">
+  <div class="item-person-name" *ngFor="let p of persons">
+    <span class="person-cell-font">{{p.familly+' '+ p.firstName}}</span>
+    <span *ngIf="p.phone" class="person-cell-font">&nbsp;({{p.phone}})</span>
+    <span *ngIf="p.classe" class="person-cell-font">&nbsp;({{p.classe}})</span>
+  </div>
+</div>
+<div class="count person-cell-font" *ngIf="getCount() > 0">{{getCount()}}</div>
+<div *ngIf="type == 'accompanist' && misAccompanistCount()" class="miss-acompagnist">
+  <mat-icon>warning</mat-icon>
+  <span class="person-cell-font">Manque {{misAccompanistCount()}} accompagnateur(s)</span>
+</div>

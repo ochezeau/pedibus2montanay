@@ -76,6 +76,7 @@ export class PersonPlanning {
   familly: string;
   firstName: string;
   phone: string;
+  classe: string;
 }
 
 export class PersonPlanningDay extends PersonPlanning {

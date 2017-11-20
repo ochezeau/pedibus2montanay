@@ -23,7 +23,6 @@ import { AccompanistItemComponent } from "./accompanist-item/accompanist-item.co
 import { AccompanistListComponent } from "./accompanist-list/accompanist-list.component";
 import { UserSummaryDayPipe } from "./user-item/user-summary-day.pipe";
 import { PlanningComponent } from "./planning/planning.component";
-import { PersonListPipe } from "./planning/person-list.pipe";
 import { UserSummaryPersonPipe } from "./user-item/user-summary-person.pipe";
 import { UserListFilterPipe } from "./user-list/user-list-filter.pipe";
 import { PlanningService } from "./service/planning.service";
@@ -31,6 +30,7 @@ import { LoginComponent } from "./login/login.component";
 import { AuthGuard } from "./service/auth.service";
 import { ContactsComponent } from "./contacts/contacts.component";
 import { UserDeleteDialogComponent } from "./user-delete-dialog/user-delete-dialog.component";
+import { PlanningListPersonComponent } from "./planning-list-person/planning-list-person.component";
 
 @NgModule({
   declarations: [
@@ -44,12 +44,12 @@ import { UserDeleteDialogComponent } from "./user-delete-dialog/user-delete-dial
     AccompanistListComponent,
     UserSummaryDayPipe,
     PlanningComponent,
-    PersonListPipe,
     UserSummaryPersonPipe,
     UserListFilterPipe,
     LoginComponent,
     ContactsComponent,
-    UserDeleteDialogComponent
+    UserDeleteDialogComponent,
+    PlanningListPersonComponent
   ],
   entryComponents: [
     UserDeleteDialogComponent

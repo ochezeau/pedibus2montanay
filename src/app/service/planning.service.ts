@@ -13,7 +13,7 @@ export class PlanningService {
   }
 
   public getCurrent(): Observable<Planning> {
-    return this.db.object(this.CURRENT_PATH).valueChanges();
+    return this.db.object<Planning>(this.CURRENT_PATH).valueChanges();
   }
 
   public setCurrent(current: Planning): Promise<void> {

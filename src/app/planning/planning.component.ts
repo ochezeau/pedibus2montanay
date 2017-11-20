@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { UserService } from "../service/user.service";
 import { PlanningService } from "../service/planning.service";
 import * as moment from "moment";
-import { DatabaseWrapper, DayPlanning, Person, Planning, PlanningType } from "../app.model";
+import { DatabaseWrapper, DayPlanning, Planning, PlanningType } from "../app.model";
 import { NotifService } from "../service/notif.service";
 import { ActivatedRoute, Router } from "@angular/router";
 
@@ -37,16 +37,6 @@ export class PlanningComponent implements OnInit {
 
   public getDayNumber(day: number): string {
     return moment().day(day + 1).week(this.current.week).year(this.current.year).format("DD");
-  }
-
-  public misAccompanistCount(accompanists: Array<string>, childs: Array<string>): number {
-    const aCount = accompanists ? accompanists.length : 0;
-    const cCount = childs ? childs.length : 0;
-    if (cCount / 7 > aCount) {
-      const mod = cCount <= 7 ? 0 : cCount % 7;
-      return mod + 1 - aCount;
-    }
-    return 0;
   }
 
   public isDay(day: string): boolean {
@@ -123,12 +113,4 @@ export class PlanningComponent implements OnInit {
       this.showSpinner = false;
     });
   }
-
-  private getCount(p: Array<Person>): number {
-    if (!p) {
-      return 0;
-    }
-    return p.length;
-  }
-
 }

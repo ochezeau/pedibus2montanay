@@ -92,7 +92,7 @@ export class UserService {
       }
       return rides.includes(p[day]);
     }).map(p => {
-      let pp = {familly: p.familly, firstName: p.firstName, phone: p.phone};
+      let pp = {familly: p.familly, firstName: p.firstName, phone: p.phone, classe: p.classe};
       return pp;
     });
   }
@@ -114,6 +114,8 @@ export class UserService {
       pp.familly = user.name;
       if (personType === "accompanists") {
         pp.phone = p.phone;
+      } else {
+        pp.classe = p.classe;
       }
       pp.monday = this.getTrueRide(p, "monday");
       pp.tuesday = this.getTrueRide(p, "tuesday");
