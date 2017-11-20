@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {MatSnackBar} from '@angular/material';
+import { Injectable } from "@angular/core";
+import { MatSnackBar } from "@angular/material";
 
 @Injectable()
 export class NotifService {
@@ -7,8 +7,8 @@ export class NotifService {
   }
 
   public show(message: string) {
-    this.snackBar.open(message, '', {
-      duration: 2000, verticalPosition: 'top'
+    this.snackBar.open(message, "", {
+      duration: 2000, verticalPosition: "bottom"
     });
   }
 

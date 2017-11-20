@@ -30,6 +30,7 @@ import { PlanningService } from "./service/planning.service";
 import { LoginComponent } from "./login/login.component";
 import { AuthGuard } from "./service/auth.service";
 import { ContactsComponent } from "./contacts/contacts.component";
+import { UserDeleteDialogComponent } from "./user-delete-dialog/user-delete-dialog.component";
 
 @NgModule({
   declarations: [
@@ -47,7 +48,11 @@ import { ContactsComponent } from "./contacts/contacts.component";
     UserSummaryPersonPipe,
     UserListFilterPipe,
     LoginComponent,
-    ContactsComponent
+    ContactsComponent,
+    UserDeleteDialogComponent
+  ],
+  entryComponents: [
+    UserDeleteDialogComponent
   ],
   imports: [
     BrowserModule,

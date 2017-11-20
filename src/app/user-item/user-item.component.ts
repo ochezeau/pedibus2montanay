@@ -5,6 +5,8 @@ import { UserService } from "../service/user.service";
 import { NotifService } from "../service/notif.service";
 import { ChildListComponent } from "../child-list/child-list.component";
 import { AccompanistListComponent } from "../accompanist-list/accompanist-list.component";
+import { MatDialog } from "@angular/material";
+import { UserDeleteDialogComponent } from "../user-delete-dialog/user-delete-dialog.component";
 
 @Component({
   selector: "app-user-item",
@@ -38,7 +40,7 @@ export class UserItemComponent implements OnInit, OnChanges {
   public formUpdate = false;
   public deleting = false;
 
-  constructor(private userService: UserService, private notifService: NotifService) {
+  constructor(private userService: UserService, private notifService: NotifService, private dialog: MatDialog) {
   }
 
   public ngOnInit(): void {
@@ -61,9 +63,16 @@ export class UserItemComponent implements OnInit, OnChanges {
     });
   }
 
-  public deleteUser(): void {
-    this.deleting = true;
-    this.userService.deleteUser(this.user).then(() => this.notifService.show("Suppression effectuée"));
+  public deleteUser(event: Event): void {
+    let dialogRef = this.dialog.open(UserDeleteDialogComponent, {
+      width: "450px", data: this.user
+    });
+    dialogRef.afterClosed().subscribe(r => {
+      if (r) {
+        this.deleting = true;
+        this.userService.deleteUser(this.user).then(() => this.notifService.show("Suppression effectuée"));
+      }
+    });
   }
 
   public undoChange(): void {
