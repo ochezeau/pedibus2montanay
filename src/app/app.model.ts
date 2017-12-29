@@ -104,6 +104,7 @@ export class UsersFilter {
 export class Planning {
   week: number;
   year: number;
+  month: string;
   days: Array<string> = [];
   planning: Array<DayPlanning>;
 }

@@ -49,9 +49,9 @@ export class UserService {
   }
 
   public sort(a: DatabaseWrapper<User>, b: DatabaseWrapper<User>): number {
-    if (a.value.name.toLowerCase() < b.value.name.toLowerCase())
+    if (a.value.name.trim().toLowerCase() < b.value.name.trim().toLowerCase())
       return -1;
-    if (a.value.name.toLowerCase() > b.value.name.toLowerCase())
+    if (a.value.name.trim().toLowerCase() > b.value.name.trim().toLowerCase())
       return 1;
     return 0;
   }

@@ -82,16 +82,19 @@ export class PlanningComponent implements OnInit {
 
   private initForCurrent(): void {
     this.planningService.getCurrent().subscribe(c => {
-      if (c) {
+      let frMoment = moment().locale("fr");
+      const nextWeek = frMoment.subtract(4, "day").add(moment.duration(1, "week"));
+
+      if (c && c.week === nextWeek.week() && c.year === nextWeek.year()) {
         this.current = c;
         if (!this.current.days) {
           this.current.days = [];
         }
       } else {
-        const nextWeek = moment().subtract(4, "day").add(moment.duration(1, "week"));
-
         this.current = new Planning();
+
         this.current.week = nextWeek.week();
+        this.current.month = nextWeek.format("MMMM");
         this.current.year = nextWeek.year();
         this.planningService.setCurrent(this.current);
       }

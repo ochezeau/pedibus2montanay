@@ -8,6 +8,8 @@ import { DayPlanning, PersonPlanningDay, PersonType } from "../app.model";
 })
 export class PlanningListPersonComponent implements OnInit {
 
+  private readonly ACC_PER_CHILD = 8;
+
   @Input()
   public type: PersonType;
 
@@ -44,7 +46,7 @@ export class PlanningListPersonComponent implements OnInit {
     let childs = this.planning[this.prefix + "Childs"];
     const aCount = accompanists ? accompanists.length : 0;
     const cCount = childs ? childs.length : 0;
-    return (cCount - cCount % 7) / 7 + 1 - aCount;
+    return (cCount - cCount % this.ACC_PER_CHILD) / this.ACC_PER_CHILD + 1 - aCount;
   }
 
 }

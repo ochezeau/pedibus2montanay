@@ -1,5 +1,16 @@
 {
   "hosting": {
-    "public": "dist"
+    "public": "dist",
+    "headers": [
+      {
+        "source": "**/*.@(js|css|png)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000"
+          }
+        ]
+      }
+    ]
   }
 }

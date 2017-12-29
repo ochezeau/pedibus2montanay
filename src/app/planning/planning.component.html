@@ -8,7 +8,7 @@
   </button>
 
   <mat-card class="setting-planning">
-    <span class="title-planning">Planning semaine {{current.week}} - {{current.year}}</span>
+    <span class="title-planning">Planning {{current.month}} {{current.year}} - semaine {{current.week}}</span>
     <mat-form-field class="select-day-planning" *ngIf="type === 'current'">
       <mat-select placeholder="Jours" multiple [(ngModel)]="current.days" name="days" (change)="updateCurrent()">
         <mat-option value="Lundi">Lundi</mat-option>
@@ -34,7 +34,7 @@
     <tr>
       <th class="day-col"></th>
       <th class="mat-elevation-z1 stop-th" colspan="2">Ferrièren <span class="stop-hour">(8h00)</span></th>
-      <th class="mat-elevation-z1 stop-th" colspan="2">Poype <span class="stop-hour">(8h10)</span></th>
+      <th class="mat-elevation-z1 stop-th stop-th-middle" colspan="2">Poype <span class="stop-hour">(8h10)</span></th>
       <th class="mat-elevation-z1 stop-th" colspan="2">Barmelle <span class="stop-hour">(8h15)</span></th>
     </tr>
     <ng-container *ngFor="let d of planning; index as i">
